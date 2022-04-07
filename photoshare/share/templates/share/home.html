@@ -1,21 +1,23 @@
 
 {% extends "share/base.html" %}
 {% block content %}
-    <div class="photo_container my-3 border border-dark p-4">
+    {% for photo in photos %}
+    <div class="photo_container border border-dark p-4">
         <div class="card text-center">
             <div class="card-header">
-              Featured
+              @{{ photo.created_by.username }}
             </div>
             <div class="card-body">
              <img src="..." class="img-fluid" alt="...">
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <p class="card-text">{{ photo.photo_caption}}</p>
               <a href="#" class="btn btn-primary">Update</a>
               <a href="#" class="btn btn-danger">Delete</a>
             </div>
             <div class="card-footer text-muted">
-              2 days ago
+              {{ photo.date_shared }}
             </div>
           </div>
     </div>
+    {% endfor %}
 {% endblock content %}
 
