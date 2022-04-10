@@ -4,7 +4,7 @@ from .forms import SignupForm
 from django.contrib import messages
 
 def signup(request):
-    """ This function handles the Signup view"""
+    """ This function handles the Signup view """
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
