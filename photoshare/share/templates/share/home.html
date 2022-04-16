@@ -1,23 +1,35 @@
 
 {% extends "share/base.html" %}
 {% block content %}
-    {% for photo in photos %}
-    <div class="photo_container border border-dark p-4">
-        <div class="card text-center">
-            <div class="card-header">
-              @{{ photo.created_by.username }}
+  {% if photos %}
+      {% for photo in photos %}
+      <div class="photo_container border border-dark p-4">
+          <div class="card text-center">
+              <div class="card-header">
+                @{{ photo.created_by.username }}
+              </div>
+              <div class="card-body">
+              <img src="media/{{ photo.url }}" class="img-fluid" alt="...">
+                <p class="card-text">{{ photo.caption }}</p>
+                <!-- Show this element on the photo if the photo creator 
+                  is the same as the authenticated user -->
+                {% if user == photo.created_by %}
+              <div>
+                <a href="{% url 'share.update' photo.id  %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'share.delete' photo.id  %}" class="btn btn-danger">Delete</a>
+              </div>
+              {% endif %}
+              </div>
+              <div class="card-footer text-muted">
+                {{ photo.date_shared }}
+              </div>
             </div>
-            <div class="card-body">
-             <img src="..." class="img-fluid" alt="...">
-              <p class="card-text">{{ photo.photo_caption}}</p>
-              <a href="#" class="btn btn-primary">Update</a>
-              <a href="#" class="btn btn-danger">Delete</a>
-            </div>
-            <div class="card-footer text-muted">
-              {{ photo.date_shared }}
-            </div>
-          </div>
+      </div>
+      {% endfor %}
+    {% else %}
+    <div class="alert alert-primary" role="alert">
+      There are currently no photos, Please Post Some
     </div>
-    {% endfor %}
+  {% endif %}
 {% endblock content %}
 
