@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class SignupForm(UserCreationForm):
+    """ This class extends the User creation form class and add an email field """
 
     email = forms.EmailField(required=True)
 
