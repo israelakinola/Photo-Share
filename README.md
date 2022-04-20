@@ -35,7 +35,8 @@ Visit Twitter Developer Account Website and click on Create app to create a Twit
 
     2. To setup database migrations 
 
-        ```'cd' into the photoshare directory 
+        ```shell
+        'cd' into the photoshare directory 
         ```
 
         ```python
