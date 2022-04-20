@@ -48,7 +48,7 @@ class UpdatePhotoView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
     
     def test_func(self):
-        """ This fucntion uses the UserPassTestMixin to validate the if the creator of the Photo obj
+        """ This method uses the UserPassTestMixin to validate the if the creator of the Photo obj
         is the same as the login user """
         photo = self.get_object()
         if photo.created_by == self.request.user:
@@ -62,7 +62,7 @@ class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = '/'
 
     def test_func(self):
-        """ This fucntion uses the UserPassTestMixin to validate the if the creator of the Photo obj
+        """ This method uses the UserPassTestMixin to validate the if the creator of the Photo obj
         is the same as the login user """
         photo = self.get_object()
         if photo.created_by == self.request.user:
