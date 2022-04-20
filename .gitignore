@@ -1,3 +1,3 @@
 .venv
-**/photoshare/media
-**/photoshare/db.sqlite3
+**/media
+**db
