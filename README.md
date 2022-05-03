@@ -17,7 +17,18 @@ PhotoShare is a photo-sharing website where registered users can share 'Photos' 
 
 ## 🛠️ Features
 
-* 
+* Users can register for an account.
+* Users can log in into an existing account.
+* Users can reset their password to an existing account
+* Users can share a photo and add captions.
+* Users can update an already shared photo or its captions.
+* Users can delete a Photo.
+* Users can comment on a photo.
+* Users can like a photo.
+* Users can message other users.
+* Users can view their profile, see all their uploaded photos or delete their accounts.
+
+
 
 ## 🌟 How to run
 Visit Twitter Developer Account Website and click on Create app to create a Twitter Devlopment Account for a Bearer Token

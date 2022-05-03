@@ -1,3 +1,41 @@
+from unicodedata import name
 from django.test import TestCase
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from .models import Photo
+from django.contrib.auth.models import User
 
-# Create your tests here.
+
+class FunctionalTestCase(TestCase):
+    """ The testcase for all functional test is writting here """
+
+    def setUp(self):
+        self.browser = webdriver.Chrome()
+    
+    def test_homepage(self):
+        #Go to the homepage
+        self.browser.get("http://localhost:8000")
+        #fetch the login form
+        fetch_login_form_ele = self.browser.find_element(By.TAG_NAME, "form")
+        #check if it's present
+        self.assertTrue(fetch_login_form_ele)
+
+
+    def tearDown(self):
+        self.browser.quit()
+
+class UnitTestCase(TestCase):
+    """ The testcase for all functional test is wååritting here """
+
+    def test_photo_obj(self):
+        user = User.objects.create_user(username='test2',
+                                 email='test2@email.com',
+                                 password='test123')
+        photo = Photo()
+        photo.url = "avi.jpg"
+        photo.caption = "test photo"
+        photo.created_by = user
+        photo.save()
+        self.assertEqual(photo.caption, 'test photo' )
