@@ -1,7 +1,7 @@
 from dataclasses import field
-import imp
 from statistics import mode
 from urllib import request
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -14,7 +14,7 @@ from django.views.generic import (
     DeleteView
 )
 from . import forms
-from .models import Photo
+from .models import Photo, Like
 
 
 class IndexView(LoginRequiredMixin, ListView):
@@ -22,8 +22,14 @@ class IndexView(LoginRequiredMixin, ListView):
     template_name = 'share/home.html'
     context_object_name = 'photos'
     def get_queryset(self):
+
         """Return the last five published questions."""
         return Photo.objects.order_by('-date_shared')[:5]
+
+    def get_context_data(self,*args, **kwargs):
+        context = super(IndexView, self).get_context_data(*args,**kwargs)
+        context['liked_photos'] = Photo.objects.filter(like__from_user = self.request.user.id)
+        return context
 
 class CreatePhotoView(LoginRequiredMixin, CreateView):
     """ This is a generic view class that handles the Create Photo form handling """
@@ -68,4 +74,17 @@ class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if photo.created_by == self.request.user:
             return True
         return False
+
+def photo_like(request):
+    """ This method handles the like photo XMLHttpRequest """
+    photo = Photo.objects.get(pk=request.GET['photo_id'])
+    liked_photos = Photo.objects.filter(like__from_user = request.user.id)
+    if(photo not in liked_photos ):
+        like = Like(from_user = request.user, to_photo=photo)
+        like.save()
+        return JsonResponse({'status':'like', 'like_count': photo.like_set.count()})
+    else:
+        like_obj  = Like.objects.filter(from_user = request.user.id , to_photo=photo.id)
+        like_obj.delete()
+        return JsonResponse({'status':'unlike', 'like_count': photo.like_set.count()})
 
