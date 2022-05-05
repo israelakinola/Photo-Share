@@ -15,9 +15,14 @@ class Photo(models.Model):
     """
     url = models.ImageField(upload_to='photos')
     caption = models.TextField()
-    date_shared = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_shared = models.DateTimeField(default=timezone.now)
 
     def get_absolute_url(self):
         """ This method redirect back to the homepage whenever a Photo object is save()  """
         return reverse('share.home')
+
+class Like(models.Model):
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    to_photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+    dated_liked = models.DateTimeField(default=timezone.now)

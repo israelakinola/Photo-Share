@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from .models import Photo
+from .models import Photo, Like
 from django.contrib.auth.models import User
 
 
@@ -28,7 +28,7 @@ class FunctionalTestCase(TestCase):
 
 class UnitTestCase(TestCase):
     """ The testcase for all functional test is wååritting here """
-
+    
     def test_photo_obj(self):
         user = User.objects.create_user(username='test2',
                                  email='test2@email.com',
@@ -39,3 +39,15 @@ class UnitTestCase(TestCase):
         photo.created_by = user
         photo.save()
         self.assertEqual(photo.caption, 'test photo' )
+    
+    def test_like_obj(self):
+        user = User.objects.create_user(username='test2',
+                                 email='test2@email.com',
+                                 password='test123')
+        photo = Photo.objects.create(url='avi2.jpg', caption="Test Photo", created_by = user)
+        like = Like()
+        like.to_photo = photo
+        like.from_user= user
+        like.save()
+        self.assertEqual(Like.objects.filter(to_photo = photo).count(), 1 )
+
