@@ -23,10 +23,8 @@ PhotoShare is a photo-sharing website where registered users can share 'Photos' 
 * Users can share a photo and add captions.
 * Users can update an already shared photo or its captions.
 * Users can delete a Photo.
-* Users can comment on a photo.
 * Users can like a photo.
-* Users can message other users.
-* Users can view their profile, see all their uploaded photos or delete their accounts.
+
 
 
 
