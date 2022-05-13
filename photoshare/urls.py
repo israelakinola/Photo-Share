@@ -22,9 +22,17 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('', include('share.urls')),
-    path('signup/', users_view.signup, name='users.signup'),
-    path('login/', users_view.UsersLoginView.as_view(template_name ='users/login.html'), name='users.login'),
-    path('logout/', auth_view.LogoutView.as_view(template_name ='users/logout.html'), name='users.logout'),
-    path('admin/', admin.site.urls),
+    path("", include("share.urls")),
+    path("signup/", users_view.signup, name="users.signup"),
+    path(
+        "login/",
+        users_view.UsersLoginView.as_view(template_name="users/login.html"),
+        name="users.login",
+    ),
+    path(
+        "logout/",
+        auth_view.LogoutView.as_view(template_name="users/logout.html"),
+        name="users.logout",
+    ),
+    path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

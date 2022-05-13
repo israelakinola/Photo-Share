@@ -3,9 +3,10 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
 class Photo(models.Model):
-    """ 
-    This class setups the Photo Object Model 
+    """
+    This class setups the Photo Object Model
     Attributes:
         url :  Photo image file
         caption : Photo caption
@@ -13,14 +14,16 @@ class Photo(models.Model):
         created : The User object who created the Photo object
 
     """
-    url = models.ImageField(upload_to='photos')
+
+    url = models.ImageField(upload_to="photos")
     caption = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     date_shared = models.DateTimeField(default=timezone.now)
 
     def get_absolute_url(self):
-        """ This method redirect back to the homepage whenever a Photo object is save()  """
-        return reverse('share.home')
+        """This method redirect back to the homepage whenever a Photo object is save()"""
+        return reverse("share.home")
+
 
 class Like(models.Model):
     from_user = models.ForeignKey(User, on_delete=models.CASCADE)
