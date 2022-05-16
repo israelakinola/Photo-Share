@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn photoshare.wsgi
+web: gunicorn photoshare.wsgigit
