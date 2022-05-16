@@ -78,10 +78,19 @@ WSGI_APPLICATION = 'photoshare.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    #     'TEST_NAME': BASE_DIR / 'test_db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'TEST_NAME': BASE_DIR / 'test_db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd4l0ciegtlbk1s',
+        'USER': 'feeaoerxdgbbqd',
+        'PASSWORD': '8d8ad82dfbaa14a464cf1f82cb928ad6dc04f2a6a0b7d849a0b05f2b435e06ec',
+        'HOST': 'ec2-3-229-11-55.compute-1.amazonaws.com',
+        'PORT': '5432'
+
     }
 }
 
