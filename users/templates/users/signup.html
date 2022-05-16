@@ -1,0 +1,21 @@
+
+{% extends "share/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="pt-4">
+    <form method="POST"> 
+        {% csrf_token %}           
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today </legend>
+                {{form|crispy}}
+            </fieldset>
+        <button type="submit" class="btn btn-primary my-3">Signup</button>
+
+        <div class="my-3">
+            <small class="text-muted">Already have an accout ? </small><a href="{% url 'users.login' %}" class="ml-2">Login</a>
+
+        </div>
+      </form>
+</div>
+{% endblock content %}
+
