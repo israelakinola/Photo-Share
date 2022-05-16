@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-z=hjyq(u1c#qyt7n9$^!td)7k-o@7ajc6%%fi@a^aim+^a6@w3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['israelakinola0photoshare.herokuapp.com']
+ALLOWED_HOSTS = ['https://git.heroku.com/israelakinola0photoshare.git']
 
+# israelakinola0photoshare.herokuapp.com
 
 # Application definition
 
@@ -78,20 +79,20 @@ WSGI_APPLICATION = 'photoshare.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    #     'TEST_NAME': BASE_DIR / 'test_db.sqlite3',
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd4l0ciegtlbk1s',
-        'USER': 'feeaoerxdgbbqd',
-        'PASSWORD': '8d8ad82dfbaa14a464cf1f82cb928ad6dc04f2a6a0b7d849a0b05f2b435e06ec',
-        'HOST': 'ec2-3-229-11-55.compute-1.amazonaws.com',
-        'PORT': '5432'
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST_NAME': BASE_DIR / 'test_db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'd4l0ciegtlbk1s',
+    #     'USER': 'feeaoerxdgbbqd',
+    #     'PASSWORD': '8d8ad82dfbaa14a464cf1f82cb928ad6dc04f2a6a0b7d849a0b05f2b435e06ec',
+    #     'HOST': 'ec2-3-229-11-55.compute-1.amazonaws.com',
+    #     'PORT': '5432'
+
+    # }
 }
 
 
