@@ -137,3 +137,8 @@ LOGIN_REDIRECT_URL = 'share.home'
 LOGIN_URL = 'users.login'
 
 django_heroku.settings(locals())
+
+#AWS SETTINGS
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
