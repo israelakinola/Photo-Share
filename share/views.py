@@ -35,7 +35,7 @@ class CreatePhotoView(LoginRequiredMixin, CreateView):
     """This is a generic view class that handles the Create Photo form handling"""
 
     model = Photo
-    fields = ["url", "caption"]
+    fields = ["image", "caption"]
 
     def form_valid(self, form):
         """This method overides the Parent form_valid method to se the created_by
@@ -48,7 +48,7 @@ class UpdatePhotoView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """This is a generic view class that handles the Create Photo form handling"""
 
     model = Photo
-    fields = ["url", "caption"]
+    fields = ["image", "caption"]
 
     def form_valid(self, form):
         """This method overides the Parent form_valid method to se the created_by

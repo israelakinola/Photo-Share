@@ -10,6 +10,6 @@ class PostAPhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
         fields = [
-            "url",
+            "image",
             "caption",
         ]

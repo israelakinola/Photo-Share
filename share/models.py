@@ -15,10 +15,13 @@ class Photo(models.Model):
 
     """
 
-    url = models.ImageField(upload_to="photos")
+    image = models.ImageField(upload_to="photos")
     caption = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     date_shared = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.caption
 
     def get_absolute_url(self):
         """This method redirect back to the homepage whenever a Photo object is save()"""
