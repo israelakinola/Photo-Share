@@ -6,6 +6,10 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
+def welcome(request):
+    """ This function handles the welcome view for none authenticated users"""
+    return render(request, "users/welcome.html")
+    
 def signup(request):
     """This function handles the Signup view and Form Handling"""
     if request.method == "POST":

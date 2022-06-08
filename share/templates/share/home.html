@@ -1,16 +1,17 @@
 {% extends "share/base.html" %}
+{% load static %}
 {% block content %}
 {% if photos %}
 {{photos.liked_photos}}
 {% for photo in photos %}
-<div class="photo_container border border-dark p-4">
+<div class="photo_container border border-dark p-4" style="max-width:600px; margin:0 auto;">
   <div class="card text-center">
     <div class="card-header">
       @{{ photo.created_by.username }}
     </div>
     <div class="card-body">
-      <img src="{{photo.image.url}}" class="img-fluid" alt="...">
-      <p class="card-text pt-4">{{ photo.caption }}/p>
+      <img src="{{photo.image.url}}" class="img-fluid max-width:50%" alt="...">
+      <p class="card-text pt-1">{{ photo.caption }}</p>
       <p class="card-text" id="like-count-{{photo.id}}">{{ photo.like_set.count }} Likes</p>
 
       <div>

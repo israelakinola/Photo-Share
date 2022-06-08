@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", include("share.urls")),
+    path("welcome/", users_view.welcome, name="users.welcome"),
     path("signup/", users_view.signup, name="users.signup"),
     path(
         "login/",

@@ -24,11 +24,19 @@ class Photo(models.Model):
         return self.caption
 
     def get_absolute_url(self):
-        """This method redirect back to the homepage whenever a Photo object is save()"""
+        """This method redirect users back to the homepage whenever a Photo object is save()"""
         return reverse("share.home")
 
 
 class Like(models.Model):
+    """
+    This class setups the Like Object Model
+    Attributes:
+        from_user :  The login user like the photo
+        to_photo : The Photo that is being liked
+        date_liked : The date the photo was liked
+
+    """
     from_user = models.ForeignKey(User, on_delete=models.CASCADE)
     to_photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
     dated_liked = models.DateTimeField(default=timezone.now)

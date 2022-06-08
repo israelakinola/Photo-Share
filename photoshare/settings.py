@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+from django.core.management import utils
+
 
 
 
@@ -24,13 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-z=hjyq(u1c#qyt7n9$^!td)7k-o@7ajc6%%fi@a^aim+^a6@w3'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = utils.get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['israelakinola0photoshare.herokuapp.com']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
+    # 'storages',
     
 ]
 
@@ -138,18 +138,5 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'share.home'
-LOGIN_URL = 'users.login'
-
-django_heroku.settings(locals())
-
-#AWS SETTINGS
-AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME=os.environ.get('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = "us-west-2"
-
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+LOGIN_URL = 'users.welcome'
 
