@@ -8,7 +8,8 @@ PHOTOSHARE
 PhotoShare is a photo-sharing website where registered users can share 'Photos' and view a listing of other users' shared photos. It is built primarily on Python(Django)
 
 <img width="1280" alt="The Shoppies Preview " src="https://github.com/israelakinola/Photo-Share/blob/main/photoshare_cover.png">
-g
+
+
 ## ⚙️ Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
 * PYTHON (Django)
