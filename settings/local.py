@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD:settings/local.py
+=======
+    # 'storages',
+>>>>>>> 538598d80ee5f99ff256a1886b27b2c1894045c6:photoshare/settings.py
     
 ]
 

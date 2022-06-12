@@ -7,6 +7,8 @@ PHOTOSHARE
 
 PhotoShare is a photo-sharing website where registered users can share 'Photos' and view a listing of other users' shared photos. It is built primarily on Python(Django)
 
+<img width="1280" alt="The Shoppies Preview " src="https://github.com/israelakinola/Photo-Share/blob/main/photoshare_cover.png">
+
 
 ## ⚙️ Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
@@ -36,13 +38,24 @@ Visit Twitter Developer Account Website and click on Create app to create a Twit
 
 2. Open a terminal/command prompt and change directory location to the folder where your script is located and run the below commands
 
-    1. To install required packages run the below command
+    1. Create a virtual enviroment to install required package
 
         ```python
+        python3 -m venv .venv /path/to/new/virtual/environment
+        ```
+    2. Activate virtual enviroment for for your OS
+        On Windows, run:
+        ```shell
+        python3 -m venv .venv /path/to/new/virtual/environment
+        ```
+
+    3. To install required packages run the below command
+        On Unix or MacOS, run:
+        ```shell
         pip install -r requirements.txt
         ```
 
-    2. To setup database migrations 
+    4. To setup database migrations 
 
         ```shell
         'cd' into the photoshare directory 
@@ -52,13 +65,13 @@ Visit Twitter Developer Account Website and click on Create app to create a Twit
         python manage.py makemigrations
         ```
 
-    3. To execute migration
+    5. To execute migration
 
         ```python
         python manage.py migrate
         ```
-    
-    4. To execute the script run the following command
+
+    6. To execute the script run the following command
 
         ```python
         python manage.py runserver

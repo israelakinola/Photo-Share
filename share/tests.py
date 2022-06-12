@@ -1,7 +1,10 @@
 #Django and Third Party Libary Imports
 from unicodedata import name
 from django.test import TestCase
+<<<<<<< HEAD
 #Share imports
+=======
+>>>>>>> 538598d80ee5f99ff256a1886b27b2c1894045c6
 from .models import Photo, Like
 from django.contrib.auth.models import User
 
