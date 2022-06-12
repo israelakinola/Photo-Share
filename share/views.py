@@ -1,3 +1,4 @@
+#Django and Third Party Libary Imports
 from dataclasses import field
 from statistics import mode
 from urllib import request
@@ -8,6 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
+#Share imports
 from . import forms
 from .models import Photo, Like
 
@@ -35,7 +38,7 @@ class CreatePhotoView(LoginRequiredMixin, CreateView):
     """This is a generic view class that handles the Create Photo form handling"""
 
     model = Photo
-    fields = ["url", "caption"]
+    fields = ["image", "caption"]
 
     def form_valid(self, form):
         """This method overides the Parent form_valid method to se the created_by
@@ -48,7 +51,7 @@ class UpdatePhotoView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """This is a generic view class that handles the Create Photo form handling"""
 
     model = Photo
-    fields = ["url", "caption"]
+    fields = ["image", "caption"]
 
     def form_valid(self, form):
         """This method overides the Parent form_valid method to se the created_by

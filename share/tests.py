@@ -1,54 +1,88 @@
+#Django and Third Party Libary Imports
 from unicodedata import name
 from django.test import TestCase
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+#Share imports
 from .models import Photo, Like
 from django.contrib.auth.models import User
 
-
-class FunctionalTestCase(TestCase):
-    """The testcase for all functional test is writting here"""
-
+class ShareModelTest(TestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome()
-
-    def test_homepage(self):
-        # Go to the homepage
-        self.browser.get("http://localhost:8000")
-        # fetch the login form
-        fetch_login_form_ele = self.browser.find_element(By.TAG_NAME, "form")
-        # check if it's present
-        self.assertTrue(fetch_login_form_ele)
-
-    def tearDown(self):
-        self.browser.quit()
-
-
-class UnitTestCase(TestCase):
-    """The testcase for all functional test is wååritting here"""
-
-    def test_photo_obj(self):
-        user = User.objects.create_user(
-            username="test2", email="test2@email.com", password="test123"
+        # Create a user
+        self.user = User.objects.create_user(
+            username="test_user", email="test2@email.com", password="test123"
         )
-        photo = Photo()
-        photo.url = "avi.jpg"
-        photo.caption = "test photo"
-        photo.created_by = user
-        photo.save()
-        self.assertEqual(photo.caption, "test photo")
 
-    def test_like_obj(self):
-        user = User.objects.create_user(
-            username="test2", email="test2@email.com", password="test123"
-        )
-        photo = Photo.objects.create(
-            url="avi2.jpg", caption="Test Photo", created_by=user
-        )
+        # Create a photo
+        self.photo = Photo()
+        self.photo.url = "avi.jpg"
+        self.photo.caption = "test photo"
+        self.photo.created_by = self.user
+        # Save photo
+        try:
+            self.photo.save()
+        except:
+            print("Couldn't save Photo to Database")
+
+    def test_if_photo_is_created_and_retrived_from_db(self):
+        # Get the fist photo from the database
+        try:
+            recent_photo = Photo.objects.all().first()
+        except:
+            print("Couldn't Get Photo from Database")
+
+        # Check if recent_photo creator ('test_user') have the user name 'test_user'
+        self.assertEqual(recent_photo.created_by.username, "test_user")
+    
+    def test_if_photo_is_updated(self):
+        # Update Photo object and save to DB
+        self.photo = Photo.objects.all().first()
+        self.photo.caption = "Update Photo"
+        try:
+            self.photo.save()
+        except:
+            print("Couldn't Save Photo to Database")
+
+        # Get the fist photo from the database
+        try:
+            recent_photo = Photo.objects.all().first()
+        except:
+            print("Couldn't Get Photo from Database")
+
+        # Check if recent_photo creator ('test_user') caption is equal to 'Update Photo'
+        self.assertEqual(recent_photo.caption, "Update Photo")
+
+    def test_if_like_obj_is_liked(self):
+        # Create a Like Object
         like = Like()
-        like.to_photo = photo
-        like.from_user = user
-        like.save()
-        self.assertEqual(Like.objects.filter(to_photo=photo).count(), 1)
+        like.to_photo = self.photo
+        like.from_user = self.user
+        try:
+            # Save to database
+            like.save()
+        except:
+            print("Couldn't Save Like to Database")
+
+        # Check if the Photo(self.photo) likes objects is equal to one
+        self.assertEqual(Like.objects.filter(to_photo=self.photo).count(), 1)
+
+    def test_if_like_obj_is_unlikde(self):
+        try:
+            #Get a recent like
+            recent_photo_like = Like.objects.all().first()
+            recent_photo_like.delete()
+        except:
+            print("Couldn't Delete Like from the Database")
+
+        # Check if the Photo(self.photo) likes objects is equal to 0
+        self.assertEqual(Like.objects.filter(to_photo=self.photo).count(), 0)
+
+    def test_if_photo_is_deleted_from_db(self):
+        # Get the fist photo from the database
+        try:
+            recent_photo = Photo.objects.all().first()
+        except:
+            print("Couldn't Get Photo from Database")
+        recent_photo.delete()
+
+        # Check if recent_photo creator ('test_user') have the user name 'test_user'
+        self.assertEqual(recent_photo.id, None)

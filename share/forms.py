@@ -1,6 +1,8 @@
+#Django and Third Party Libary Imports
 from dataclasses import field
 from django import forms
 from django.contrib.auth.models import User
+#Share imports
 from .models import Photo
 
 
@@ -10,6 +12,6 @@ class PostAPhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
         fields = [
-            "url",
+            "image",
             "caption",
         ]

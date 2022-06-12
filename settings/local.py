@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.core.management import utils
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z=hjyq(u1c#qyt7n9$^!td)7k-o@7ajc6%%fi@a^aim+^a6@w3'
+SECRET_KEY = utils.get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://git.heroku.com/israelakinola0photoshare.git']
+ALLOWED_HOSTS = ['localhost']
 
-# israelakinola0photoshare.herokuapp.com
 
 # Application definition
 
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 ]
 
 MIDDLEWARE = [
@@ -84,15 +88,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
         'TEST_NAME': BASE_DIR / 'test_db.sqlite3',
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'd4l0ciegtlbk1s',
-    #     'USER': 'feeaoerxdgbbqd',
-    #     'PASSWORD': '8d8ad82dfbaa14a464cf1f82cb928ad6dc04f2a6a0b7d849a0b05f2b435e06ec',
-    #     'HOST': 'ec2-3-229-11-55.compute-1.amazonaws.com',
-    #     'PORT': '5432'
-
-    # }
 }
 
 
@@ -142,4 +137,5 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'share.home'
-LOGIN_URL = 'users.login'
+LOGIN_URL = 'users.welcome'
+
