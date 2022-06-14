@@ -2,17 +2,18 @@
 from dataclasses import field
 from statistics import mode
 from urllib import request
-from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.http import HttpResponse, JsonResponse
 
 #Share imports
 from . import forms
 from .models import Photo, Like
+from .utility import like_and_unlike_photo
 
 
 class IndexView(LoginRequiredMixin, ListView):
@@ -83,14 +84,11 @@ class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def photo_like(request):
-    """This method handles the like photo XMLHttpRequest"""
+    """This method handles the like photo XMLHttpRequest from the Front End"""
+    #Get Photo ID of clicked Photo
     photo = Photo.objects.get(pk=request.GET["photo_id"])
+    #Get All Photo liked by Auth User
     liked_photos = Photo.objects.filter(like__from_user=request.user.id)
-    if photo not in liked_photos:
-        like = Like(from_user=request.user, to_photo=photo)
-        like.save()
-        return JsonResponse({"status": "like", "like_count": photo.like_set.count()})
-    else:
-        like_obj = Like.objects.filter(from_user=request.user.id, to_photo=photo.id)
-        like_obj.delete()
-        return JsonResponse({"status": "unlike", "like_count": photo.like_set.count()})
+    return like_and_unlike_photo(request, photo, liked_photos)
+    
+    
