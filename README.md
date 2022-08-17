@@ -13,7 +13,7 @@ PhotoShare is a photo-sharing website where registered users can share 'Photos' 
 ## ⚙️ Languages or Frameworks Used
 <!--Remove the below lines and add yours -->
 * PYTHON (Django)
-* CSS Bootsrtaps
+* CSS (Twitter Bootstrap)
 * HTML
 
 
